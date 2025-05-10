@@ -25,3 +25,6 @@ jobs:
             push: true
             context: .
             tags: ${{ secrets.DOCKER_USERNAME }}/air-quality-frontend:latest
+            build-args: |
+              REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}
+              REACT_APP_TELEGRAM_BOT_USERNAME=${{ secrets.REACT_APP_TELEGRAM_BOT_USERNAME }}
