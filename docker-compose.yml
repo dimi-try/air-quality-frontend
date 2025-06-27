@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+        - REACT_APP_TELEGRAM_BOT_USERNAME=${REACT_APP_TELEGRAM_BOT_USERNAME}
+    image: ${DOCKER_HUB_USER}/air-quality-frontend:latest
