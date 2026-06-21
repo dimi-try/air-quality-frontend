@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import './AirQuality.css';
 import useLocation from '../../../hooks/useLocation';
 
+const AQI_INFO = {
+  1: { emoji: '🟢', description: 'очень хорошее' },
+  2: { emoji: '🟡', description: 'хорошее' },
+  3: { emoji: '🟠', description: 'умеренное' },
+  4: { emoji: '🔴', description: 'плохое' },
+  5: { emoji: '🟣', description: 'очень плохое' },
+};
+
+function getAqiInfo(aqiValue) {
+  return AQI_INFO[aqiValue] || { emoji: '⚪', description: 'неизвестное' };
+}
 
 const AirQuality = ({ airData }) => {
   const { location } = useLocation();
@@ -61,6 +72,7 @@ const AirQuality = ({ airData }) => {
 
   const { aqi } = airData.list[0].main;
   const { co, no2, o3, so2, pm10, pm2_5 } = airData.list[0].components;
+  const aqiInfo = getAqiInfo(aqi);
 
   return (
     <div className="air-quality-widget">
@@ -71,7 +83,7 @@ const AirQuality = ({ airData }) => {
       </div>
       <div className="air-quality-info">
         <div className="temperature">
-          <span className="temp-value">{aqi} AQI</span>
+          <span className="temp-value">{aqi} AQI {aqiInfo.emoji} ({aqiInfo.description})</span>
         </div>
         <div className="divider">
           <div className="bottom-divider" />
